@@ -1,13 +1,19 @@
 package com.codeup.codeupblog.controllers;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import java.lang.Math;
-
 
 @Controller
-public class RollDice {
+public class Dice {
+
+	@GetMapping("/roll-dice/")
+	public String homeDicePage(Model model) {
+		String pageTitle = "Pick a number!";
+		model.addAttribute("pageTitle", pageTitle);
+		return "loadDice";
+	}
 
 	public Integer DiceRoll() {
 		int max = 6;
@@ -20,6 +26,7 @@ public class RollDice {
 	@GetMapping("/roll-dice/{num}")
 	public String GuessNumber(@PathVariable int num, Model model) {
 		int diceRolled = DiceRoll();
+		String pageTitle = "Results";
 		boolean win = false;
 		boolean lose = false;
 
@@ -32,10 +39,8 @@ public class RollDice {
 		model.addAttribute("win", win);
 		model.addAttribute("lose", lose);
 		model.addAttribute("diceRolled", diceRolled);
-		String pageTitle = "Results";
 		model.addAttribute("pageTitle", pageTitle);
 		return "dice";
 	}
-
 
 }
