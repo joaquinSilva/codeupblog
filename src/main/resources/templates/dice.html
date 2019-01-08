@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Result</title>
+	<style>
+		.win {
+			color: green;
+		}
+		.lose {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<h1 id="guess">You guessed the number: <span th:text="${num}"></span>.</h1>
+	<h1 id="randomNum">The random dice rolled the number: <span th:text="${diceRolled}"></span>.</h1>
+	<div class="win" th:if="${win}">
+		Congratulations, you won this round! Would you like to play again?
+	</div>
+	<div class="lose" th:if="${lose}">
+		Sorry, you lost this round. Would you like to try again?
+	</div>
+	<div>
+		<a id="button" href="/roll-dice/">Play again</a>
+	</div>
+</body>
+</html>
