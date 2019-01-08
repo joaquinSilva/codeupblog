@@ -32,6 +32,8 @@ public class RollDice {
 		model.addAttribute("win", win);
 		model.addAttribute("lose", lose);
 		model.addAttribute("diceRolled", diceRolled);
+		String pageTitle = "Results";
+		model.addAttribute("pageTitle", pageTitle);
 		return "dice";
 	}
 

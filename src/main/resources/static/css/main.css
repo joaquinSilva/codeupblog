@@ -1,0 +1,32 @@
+.win {
+    color: green;
+}
+.lose {
+    color: red;
+}
+#diceHeader {
+    background-color: blue;
+    color: navajowhite;
+    display: inline;
+    padding: 10px;
+    border-radius: 4px;
+}
+.numbers {
+    list-style: none;
+    height: 50px;
+    width: 50px;
+    background-color: crimson;
+    margin: 10px;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+}
+.diceLinks {
+    color: black;
+}
+nav ul li {
+    background-color: aqua;
+}
+nav ul li a {
+    color: blue;
+}

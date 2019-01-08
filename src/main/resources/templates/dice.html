@@ -1,18 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <title>Result</title>
-	<style>
-		.win {
-			color: green;
-		}
-		.lose {
-			color: red;
-		}
-	</style>
-</head>
+<head th:include="partials :: head" />
 <body>
+<nav th:replace="partials :: navbar" />
 	<h1 id="guess">You guessed the number: <span th:text="${num}"></span>.</h1>
 	<h1 id="randomNum">The random dice rolled the number: <span th:text="${diceRolled}"></span>.</h1>
 	<div class="win" th:if="${win}">
@@ -24,5 +14,6 @@
 	<div>
 		<a id="button" href="/roll-dice/">Play again</a>
 	</div>
+	<footer th:replace="partials :: footer" />
 </body>
 </html>
