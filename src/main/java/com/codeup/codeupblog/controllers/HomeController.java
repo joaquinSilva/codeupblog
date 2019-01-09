@@ -9,7 +9,9 @@ public class HomeController {
 	@GetMapping("/")
 	public String homePage(Model model) {
 		String pageTitle = "Home";
+		String headerContent = "Home Page";
 		model.addAttribute("pageTitle", pageTitle);
+		model.addAttribute("headerContent", headerContent);
 		return "home";
 	}
 
