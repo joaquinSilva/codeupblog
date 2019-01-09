@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="partials :: head" />
+<body>
+<nav th:replace="partials :: navbar" />
+	<h1 id="guess">You guessed the number: <span th:text="${num}"></span>.</h1>
+	<h1 id="randomNum">The random dice rolled the number: <span th:text="${diceRolled}"></span>.</h1>
+	<div class="win" th:if="${win}">
+		Congratulations, you won this round! Would you like to play again?
+	</div>
+	<div class="lose" th:if="${lose}">
+		Sorry, you lost this round. Would you like to try again?
+	</div>
+	<div>
+		<a id="button" href="/roll-dice/">Play again</a>
+	</div>
+	<footer th:replace="partials :: footer" />
+</body>
+</html>

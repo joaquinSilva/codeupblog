@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="partials :: head" />
+
+<body>
+<header th:replace="partials :: header" />
+<nav th:replace="partials :: navbar" />
+<h1>This is the page that shows all posts!</h1>
+<div th:each="post : ${posts}">
+	<a th:href="@{'/posts/' + ${post.id}}"><p th:text="${post.title}"></p></a>
+	<p th:text="${post.body}"></p>
+</div>
+<footer th:replace="partials :: footer" />
+</body>
+</html>
