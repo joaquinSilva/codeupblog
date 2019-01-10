@@ -4,10 +4,7 @@ import com.codeup.codeupblog.models.Post;
 import com.codeup.codeupblog.services.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -45,17 +42,42 @@ public class PostController {
 		return "posts/show";
 	}
 
-	@ResponseBody
-	@GetMapping("/posts/create")
-	public String createPost() {
-		return "This page will display the form to create a new post!";
+	@GetMapping("/posts/{id}/edit")
+	public String showEditPost(@PathVariable int id, Model model) {
+		boolean create = false;
+		model.addAttribute("create", create);
+
+		Post post = postService.one(id);
+		model.addAttribute("id", id);
+		model.addAttribute("post", post);
+		String pageTitle = "Edit Post";
+		String headerContent = "Edit Post";
+		model.addAttribute("pageTitle", pageTitle);
+		model.addAttribute("headerContent", headerContent);
+		return "posts/create";
 	}
 
-	@ResponseBody
-	@PostMapping("/posts/create")
-	public String savePost() {
-		return "This page method will save a new post to the database!";
+	@GetMapping("/posts/create")
+	public String showCreatePost(Model model) {
+		boolean create = true;
+		model.addAttribute("create", create);
+		model.addAttribute("post", new Post());
+		return "posts/create";
 	}
+
+	@PostMapping("/posts/create")
+	public String createPost(@ModelAttribute Post post) {
+		postService.save(post);
+		return "redirect:/posts";
+	}
+
+	@PostMapping("/posts/edit")
+	public String editPost(@ModelAttribute Post post) {
+		postService.edit(post);
+		return "redirect:/posts";
+	}
+
+
 
 
 }

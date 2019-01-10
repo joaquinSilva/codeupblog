@@ -10,7 +10,9 @@
 <div th:each="post : ${posts}">
 	<a th:href="@{'/posts/' + ${post.id}}"><p th:text="${post.title}"></p></a>
 	<p th:text="${post.body}"></p>
+	<a th:href="@{'/posts/' + ${post.id}} + '/edit'"><p>Edit Post</p></a>
 </div>
 <footer th:replace="partials :: footer" />
 </body>
 </html>
+

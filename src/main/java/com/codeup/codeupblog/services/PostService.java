@@ -36,4 +36,16 @@ public class PostService {
 		create(new Post("New Post 5", "Text of body goes here."));
 	}
 
+	public Post save(Post post) {
+		post.setId(posts.size() + 1);
+		posts.add(post);
+		return post;
+	}
+
+	public Post edit(Post post) {
+		post.setId(posts.size() + 1);
+		posts.add(post);
+		return post;
+	}
+
 }
