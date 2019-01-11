@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="partials :: head" />
+
+<body>
+<header th:replace="partials :: header" />
+<nav th:replace="partials :: navbar" />
+<div>
+    <form action="/posts/create" method="post" th:object="${post}" th:if="${create}">
+        <h1>Create a new Post!</h1>
+        Title:
+        <input th:field="*{title}" />
+        <br />
+        Description:
+        <textarea th:field="*{body}" ></textarea>
+        <br />
+        <input type="submit" />
+    </form>
+    <form th:action="'/posts/' + ${id} + '/edit'" method="post" th:object="${post}" th:unless="${create}">
+        <h1>Edit the Post!</h1>
+        Title:
+        <input th:field="*{title}" />
+        <br />
+        Description:
+        <textarea th:field="*{body}" ></textarea>
+        <br />
+        <input type="submit" />
+    </form>
+</div>
+
+<footer th:replace="partials :: footer" />
+</body>
+</html>
+
+<!--<div th:switch="${user.role}">-->
+    <!--<p th:case="'admin'">User is an administrator</p>-->
+    <!--<p th:case="#{roles.manager}">User is a manager</p>-->
