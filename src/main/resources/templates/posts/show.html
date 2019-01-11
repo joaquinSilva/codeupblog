@@ -10,6 +10,9 @@
 	<p th:text="${post.title}"></p>
 	<p th:text="${post.body}"></p>
 	<a th:href="@{'/posts/' + ${post.id}} + '/edit'"><p>Edit Post</p></a>
+	<form th:action="'/posts/' + ${post.id} + '/delete'" method="post" th:object="${post}">
+		<button type="submit" name="button">Delete</button>
+	</form>
 </div>
 <footer th:replace="partials :: footer" />
 </body>

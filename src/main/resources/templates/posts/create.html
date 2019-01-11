@@ -13,17 +13,17 @@
         <input th:field="*{title}" />
         <br />
         Description:
-        <input th:field="*{body}" />
+        <textarea th:field="*{body}" ></textarea>
         <br />
         <input type="submit" />
     </form>
-    <form action="/posts/edit" method="post" th:object="${post}" th:unless="${create}">
+    <form th:action="'/posts/' + ${id} + '/edit'" method="post" th:object="${post}" th:unless="${create}">
         <h1>Edit the Post!</h1>
         Title:
         <input th:field="*{title}" />
         <br />
         Description:
-        <input th:field="*{body}" />
+        <textarea th:field="*{body}" ></textarea>
         <br />
         <input type="submit" />
     </form>

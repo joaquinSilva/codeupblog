@@ -1,7 +1,8 @@
 package com.codeup.codeupblog.controllers;
 
 import com.codeup.codeupblog.models.Post;
-import com.codeup.codeupblog.services.PostService;
+import com.codeup.codeupblog.models.PostRepository;
+//import com.codeup.codeupblog.services.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,18 +12,27 @@ import java.util.List;
 @Controller
 public class PostController {
 
-	private final PostService postService;
-	private List<Post> posts;
+//	private final PostService postService;
 
-	public PostController(PostService postService) {
-		this.postService = postService;
+	//	public PostController(PostService postService) {
+//		this.postService = postService;
+//	}
+
+//	private List<Post> posts;
+
+	private final PostRepository postDao;
+
+	public PostController(PostRepository postDao) {
+		this.postDao = postDao;
 	}
 
 	@GetMapping("/posts")
 	public String getPosts(Model model) {
 
-		List<Post> posts = postService.all();
-		model.addAttribute("posts", posts);
+		model.addAttribute("posts", postDao.findAll());
+
+//		List<Post> posts = postService.all();
+//		model.addAttribute("posts", posts);
 		String pageTitle = "Posts Index";
 		String headerContent = "Index of All Posts";
 		model.addAttribute("pageTitle", pageTitle);
@@ -31,10 +41,12 @@ public class PostController {
 	}
 
 	@GetMapping("/posts/{id}")
-	public String getPost(@PathVariable int id, Model model) {
-		Post post = postService.one(id);
+	public String getPost(@PathVariable long id, Model model) {
+//		Post post = postService.one(id);
+//		model.addAttribute("post", post);
+
+		model.addAttribute("post", postDao.findOne(id));
 		model.addAttribute("id", id);
-		model.addAttribute("post", post);
 		String pageTitle = "Your post";
 		String headerContent = "Your post";
 		model.addAttribute("pageTitle", pageTitle);
@@ -43,13 +55,15 @@ public class PostController {
 	}
 
 	@GetMapping("/posts/{id}/edit")
-	public String showEditPost(@PathVariable int id, Model model) {
+	public String showEditPost(@PathVariable long id, Model model) {
 		boolean create = false;
 		model.addAttribute("create", create);
 
-		Post post = postService.one(id);
+//		Post post = postService.one(id);
+//		model.addAttribute("post", post);
+
 		model.addAttribute("id", id);
-		model.addAttribute("post", post);
+		model.addAttribute("post", postDao.findOne(id));
 		String pageTitle = "Edit Post";
 		String headerContent = "Edit Post";
 		model.addAttribute("pageTitle", pageTitle);
@@ -67,13 +81,23 @@ public class PostController {
 
 	@PostMapping("/posts/create")
 	public String createPost(@ModelAttribute Post post) {
-		postService.save(post);
+//		postService.save(post);
+		postDao.save(post);
 		return "redirect:/posts";
 	}
 
-	@PostMapping("/posts/edit")
-	public String editPost(@ModelAttribute Post post) {
-		postService.edit(post);
+	@PostMapping("/posts/{id}/edit")
+	public String editPost(@PathVariable long id, @ModelAttribute Post post) {
+//		postService.edit(post);
+		postDao.save(post);
+		return "redirect:/posts/" + post.getId();
+//		return "redirect:/posts";
+	}
+
+	@PostMapping("/posts/{id}/delete")
+	public String deletePost(@PathVariable long id, @ModelAttribute Post post) {
+//		postDao.delete(post);
+		postDao.delete(id);
 		return "redirect:/posts";
 	}
 
