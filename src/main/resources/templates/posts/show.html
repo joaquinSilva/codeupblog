@@ -7,6 +7,9 @@
 <header th:replace="partials :: header" />
 <nav th:replace="partials :: navbar" />
 <div>
+	<div>
+		Written by: <span th:text="${email}"></span>
+	</div>
 	<p th:text="${post.title}"></p>
 	<p th:text="${post.body}"></p>
 	<a th:href="@{'/posts/' + ${post.id}} + '/edit'"><p>Edit Post</p></a>

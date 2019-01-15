@@ -3,11 +3,11 @@ package com.codeup.codeupblog.controllers;
 import com.codeup.codeupblog.models.Post;
 import com.codeup.codeupblog.models.PostRepository;
 //import com.codeup.codeupblog.services.PostService;
+import com.codeup.codeupblog.models.User;
+import com.codeup.codeupblog.models.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 public class PostController {
@@ -20,9 +20,13 @@ public class PostController {
 
 //	private List<Post> posts;
 
+	private final UserRepository userDao;
+
 	private final PostRepository postDao;
 
-	public PostController(PostRepository postDao) {
+
+	public PostController(UserRepository userDao, PostRepository postDao) {
+		this.userDao = userDao;
 		this.postDao = postDao;
 	}
 
@@ -44,7 +48,7 @@ public class PostController {
 	public String getPost(@PathVariable long id, Model model) {
 //		Post post = postService.one(id);
 //		model.addAttribute("post", post);
-
+		model.addAttribute("email", postDao.findOne(id).getUser().getEmail());
 		model.addAttribute("post", postDao.findOne(id));
 		model.addAttribute("id", id);
 		String pageTitle = "Your post";
@@ -80,8 +84,10 @@ public class PostController {
 	}
 
 	@PostMapping("/posts/create")
-	public String createPost(@ModelAttribute Post post) {
+	public String createPost(@ModelAttribute Post post, User user) {
 //		postService.save(post);
+		post.setUser(user);
+//		post.setUser(UserRepository.findOne(user));
 		postDao.save(post);
 		return "redirect:/posts";
 	}
