@@ -54,4 +54,5 @@ public class Post {
 		this.title = title;
 	}
 	public void setUser(User user) { this.user = user; }
+
 }

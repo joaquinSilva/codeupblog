@@ -1,10 +1,11 @@
 package com.codeup.codeupblog.controllers;
 
 import com.codeup.codeupblog.models.Post;
-import com.codeup.codeupblog.models.PostRepository;
+import com.codeup.codeupblog.repositories.PostRepository;
 //import com.codeup.codeupblog.services.PostService;
 import com.codeup.codeupblog.models.User;
-import com.codeup.codeupblog.models.UserRepository;
+import com.codeup.codeupblog.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
